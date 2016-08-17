@@ -86,6 +86,9 @@ extension JPSJsonPatcher {
                 newJson.object = dictionary
             }
             if var arr = traversedJson.arrayObject, let indexString = pointer.pointerValue.first as? String, let index = Int(indexString) {
+                if index >= arr.count {
+                    throw JPSJsonPatcherApplyError.ArrayIndexOutOfBounds
+                }
                 arr.removeAtIndex(index)
                 newJson.object = arr
             }
